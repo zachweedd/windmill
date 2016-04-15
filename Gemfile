@@ -26,6 +26,7 @@ gem 'highline'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
+  gem 'factory_girl'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'
