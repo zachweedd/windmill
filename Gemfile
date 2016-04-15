@@ -15,6 +15,7 @@ gem 'coffee-rails', '~> 4.1.0'
 gem 'jquery-rails'
 gem 'turbolinks'
 gem 'jbuilder', '~> 2.0'
+gem 'haml-rails', "~> 0.9"
 
 # DB-related Gems
 gem 'will_paginate'

@@ -1,0 +1,2 @@
+module ConfigurationGroupsHelper
+end

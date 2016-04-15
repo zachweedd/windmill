@@ -1,0 +1,14 @@
+%p#notice= notice
+%h1 Listing Configuration Groups
+%table
+  %thead
+    %tr
+      %th{:colspan => "3"}
+  %tbody
+    - @configuration_groups.each do |configuration_group|
+      %tr
+        %td= link_to 'Show', configuration_group
+        %td= link_to 'Edit', edit_configuration_group_path(configuration_group)
+        %td= link_to 'Destroy', configuration_group, method: :delete, data: { confirm: 'Are you sure?' }
+%br/
+= link_to 'New Configuration group', new_configuration_group_path
