@@ -6,6 +6,7 @@ class ConfigurationGroupsController < ApplicationController
   end
 
   def show
+    @clients = @configuration_group.clients
   end
 
   def new

@@ -1,4 +1,48 @@
-%p#notice= notice
-= link_to 'Edit', edit_configuration_group_path(@configuration_group)
-|
-= link_to 'Back', configuration_groups_path
+.container
+  %h1
+    Configuration group: #{@configuration_group.name}
+  %h2
+    Configuration files in this group (#{@configuration_group.configurations.count})
+  %table.table
+    %thead
+      %tr
+        %th Name
+        %th Version
+        %th Assignment Count
+        %th Endpoint Count
+        %th Default Config
+    %tbody
+      - @configuration_group.configurations.each do |config|
+        %tr
+          %td
+            %a{:href => "#{@configuration_group.id}/configurations/#{config.id}/edit"}= config.name
+          %td= config.version
+          %td= config.assigned_endpoints.count
+          %td= config.configured_endpoints.count
+          %td
+            - checked = @default_config == config
+            = radio_button_tag :default_config, config.id, checked, { disabled: 'disabled' }
+  = link_to 'Add new configuration', new_configuration_path(@configuration_group.id)
+  %h2
+    Endpoints in this group (#{@clients.count})
+
+  %table.table
+    %thead
+      %tr
+        %th Identifier
+        %th Osquery version
+        %th Config refresh count
+        %th Last ip address
+        %th Last config refresh
+        %th Assigned Configuration
+    %tbody
+      - @clients.each do |client|
+        %tr
+          %td= client.identifier
+          %td= client.last_version
+          %td= client.config_count
+          %td= client.last_ip
+          %td
+            = client.last_config_time
+            (#{difftime(client.last_config_time, DateTime.now)})
+          %td= client.assigned_config.name
