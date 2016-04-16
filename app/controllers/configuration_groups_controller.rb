@@ -1,28 +1,20 @@
 class ConfigurationGroupsController < ApplicationController
   before_action :set_configuration_group, only: [:show, :edit, :update, :destroy]
 
-  # GET /configuration_groups
-  # GET /configuration_groups.json
   def index
     @configuration_groups = ConfigurationGroup.all
   end
 
-  # GET /configuration_groups/1
-  # GET /configuration_groups/1.json
   def show
   end
 
-  # GET /configuration_groups/new
   def new
     @configuration_group = ConfigurationGroup.new
   end
 
-  # GET /configuration_groups/1/edit
   def edit
   end
 
-  # POST /configuration_groups
-  # POST /configuration_groups.json
   def create
     @configuration_group = ConfigurationGroup.new(configuration_group_params)
 
@@ -37,8 +29,6 @@ class ConfigurationGroupsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /configuration_groups/1
-  # PATCH/PUT /configuration_groups/1.json
   def update
     respond_to do |format|
       if @configuration_group.update(configuration_group_params)
@@ -51,8 +41,6 @@ class ConfigurationGroupsController < ApplicationController
     end
   end
 
-  # DELETE /configuration_groups/1
-  # DELETE /configuration_groups/1.json
   def destroy
     @configuration_group.destroy
     respond_to do |format|
@@ -62,13 +50,13 @@ class ConfigurationGroupsController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
+
     def set_configuration_group
       @configuration_group = ConfigurationGroup.find(params[:id])
     end
 
-    # Never trust parameters from the scary internet, only allow the white list through.
+
     def configuration_group_params
-      params.fetch(:configuration_group, {})
+      params.require(:configuration_group).permit(:name)
     end
 end
