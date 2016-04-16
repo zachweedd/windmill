@@ -27,10 +27,12 @@ gem 'highline'
 gem 'sdoc', '~> 0.4.0', group: :doc
 
 group :development, :test do
-  gem 'factory_girl'
+  gem 'faker'
+  gem 'factory_girl_rails'
   gem 'database_cleaner'
   gem 'capybara'
   gem 'rspec-rails', '~> 3.0'
+  gem 'shoulda-matchers', '~> 3.1'
   gem 'pry'
   gem 'pry-byebug'
 end

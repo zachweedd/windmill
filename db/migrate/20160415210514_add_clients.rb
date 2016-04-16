@@ -1,7 +1,7 @@
 class AddClients < ActiveRecord::Migration
   def change
-    create_table "clients", force: :cascade do |t|
-      t.string   "node_key",               null: false
+    create_table "clients" do |t|
+      t.string   "client_key", null: false
       t.string   "last_version"
       t.integer  "config_count"
       t.string   "last_ip"
@@ -14,6 +14,6 @@ class AddClients < ActiveRecord::Migration
       t.timestamps
     end
 
-    add_index "clients", ["node_key"], name: "index_clients_on_node_key"
+    add_index "clients", ["client_key"], name: "index_clients_on_client_key"
   end
 end

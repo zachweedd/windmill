@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
 
+  resources :configurations
   resources :clients
   resources :configuration_groups
   resources :api_keys

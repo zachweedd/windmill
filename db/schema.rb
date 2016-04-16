@@ -28,7 +28,7 @@ ActiveRecord::Schema.define(version: 20160415210514) do
   add_index "api_keys", ["key"], name: "index_api_keys_on_key", using: :btree
 
   create_table "clients", force: :cascade do |t|
-    t.string   "node_key",               null: false
+    t.string   "client_key",             null: false
     t.string   "last_version"
     t.integer  "config_count"
     t.string   "last_ip"
@@ -42,7 +42,7 @@ ActiveRecord::Schema.define(version: 20160415210514) do
     t.datetime "updated_at"
   end
 
-  add_index "clients", ["node_key"], name: "index_clients_on_node_key", using: :btree
+  add_index "clients", ["client_key"], name: "index_clients_on_client_key", using: :btree
 
   create_table "configuration_groups", force: :cascade do |t|
     t.string   "name",              null: false
@@ -55,7 +55,7 @@ ActiveRecord::Schema.define(version: 20160415210514) do
   create_table "configurations", force: :cascade do |t|
     t.string  "name",                   null: false
     t.integer "version",                null: false
-    t.jsonb   "config",                 null: false
+    t.jsonb   "config_json",            null: false
     t.text    "notes"
     t.integer "configuration_group_id"
   end
