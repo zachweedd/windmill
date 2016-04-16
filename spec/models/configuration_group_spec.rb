@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ConfigurationGroup, :model, focus: true do
+RSpec.describe ConfigurationGroup, :model do
   let(:configuration_group){ create :configuration_group }
   let(:configuration){ create(:configuration, config_json: { test: 'test' }) }
   let(:configuration_two){ create(:configuration, config_json: { test: 'test' }) }
