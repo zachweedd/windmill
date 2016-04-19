@@ -16,8 +16,7 @@ RSpec.describe Configuration, :model do
 
     describe 'on destroy' do
       it 'fails when there are clients present' do
-        configuration.assigned_clients << create(:client)
-        configuration.save!
+        configuration.configuration_group.clients.create(client_key: 'test_key')
         expect{configuration.destroy}.to change{ Configuration.count }.by(0)
       end
 
