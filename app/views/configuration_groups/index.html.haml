@@ -1,6 +1,6 @@
 .container
   .panel.panel-default
-    .panel-heading Endpoint Groups
+    .panel-heading Configuration Groups
     %table.table
       %thead
         %tr
@@ -22,10 +22,6 @@
                     = link_to 'Delete', group, method: :delete, class: 'btn btn-xs btn-danger'
 
 .container
-  = form_for(:configuration_group) do |f|
-    .form-group
-      %label Add new Configuration Group
-      = f.text_field :name, placeholder: 'New Configuration Group', id: 'group', class: 'form-control'
-    = f.submit 'Submit', class: 'btn btn-primary'
+  = render 'form'
 
 

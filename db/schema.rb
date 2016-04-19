@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160415210514) do
+ActiveRecord::Schema.define(version: 20160419165144) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -26,6 +26,14 @@ ActiveRecord::Schema.define(version: 20160415210514) do
   end
 
   add_index "api_keys", ["key"], name: "index_api_keys_on_key", using: :btree
+
+  create_table "client_configurations", force: :cascade do |t|
+    t.string  "name",                   null: false
+    t.integer "version",                null: false
+    t.jsonb   "config_json",            null: false
+    t.text    "notes"
+    t.integer "configuration_group_id"
+  end
 
   create_table "clients", force: :cascade do |t|
     t.string   "client_key",             null: false
@@ -50,14 +58,6 @@ ActiveRecord::Schema.define(version: 20160415210514) do
     t.integer  "canary_config_id"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "configurations", force: :cascade do |t|
-    t.string  "name",                   null: false
-    t.integer "version",                null: false
-    t.jsonb   "config_json",            null: false
-    t.text    "notes"
-    t.integer "configuration_group_id"
   end
 
 end

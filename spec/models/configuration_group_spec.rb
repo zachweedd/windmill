@@ -2,8 +2,8 @@ require 'rails_helper'
 
 RSpec.describe ConfigurationGroup, :model do
   let(:configuration_group){ create :configuration_group }
-  let(:configuration){ create(:configuration, config_json: { test: 'test' }) }
-  let(:configuration_two){ create(:configuration, config_json: { test: 'test' }) }
+  let(:configuration){ create(:client_configuration, config_json: { test: 'test' }) }
+  let(:configuration_two){ create(:client_configuration, config_json: { test: 'test' }) }
 
   it{ should validate_presence_of(:name) }
 

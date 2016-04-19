@@ -1,5 +1,5 @@
 FactoryGirl.define do
-  factory :configuration do
+  factory :client_configuration do
     name 'test'
     version 1
     notes 'test'

@@ -22,7 +22,7 @@
           %td
             - checked = @default_config == config
             = radio_button_tag :default_config, config.id, checked, { disabled: 'disabled' }
-  = link_to 'Add new configuration', new_configuration_path(@configuration_group.id)
+  = link_to 'Add New Configuration', new_configuration_group_configuration_path(@configuration_group)
   %h2
     Endpoints in this group (#{@clients.count})
 

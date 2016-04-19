@@ -2,7 +2,7 @@ require 'rails_helper'
 
 RSpec.describe Client, :model do
   let(:config_group){ create :configuration_group }
-  let(:config){ create(:configuration, config_json: { test: 'test' }) }
+  let(:config){ create(:client_configuration, config_json: { test: 'test' }) }
   let(:client){ create(:client, configuration_group: config_group) }
 
   before do

@@ -1,4 +1,4 @@
-class Configuration < ActiveRecord::Base
+class ClientConfiguration < ActiveRecord::Base
 
   validates_presence_of :name
   validates_presence_of :version

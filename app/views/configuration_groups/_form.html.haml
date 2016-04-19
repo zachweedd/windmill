@@ -1,11 +1,7 @@
+- @configuration_group ||= ConfigurationGroup.new
+
 = form_for(@configuration_group) do |f|
-  - if @configuration_group.errors.any?
-    #error_explanation
-      %h2
-        = pluralize(@configuration_group.errors.count, "error")
-        prohibited this configuration_group from being saved:
-      %ul
-        - @configuration_group.errors.full_messages.each do |message|
-          %li= message
-  .actions
-    = f.submit
+  .form-group
+    %label Add new Configuration Group
+    = f.text_field :name, placeholder: 'New Configuration Group', id: 'group', class: 'form-control'
+  = f.submit 'Submit', class: 'btn btn-primary'

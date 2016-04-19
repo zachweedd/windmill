@@ -1,13 +1,13 @@
 class ConfigurationGroup < ActiveRecord::Base
   validates_presence_of :name
 
-  has_many :configurations
+  has_many :configurations, class_name: 'ClientConfiguration'
   has_many :clients
 
   before_destroy :can_destroy?
 
   def default_config
-    Configuration.where(id: self.default_config_id || self.configurations.first.id).try(:last)
+    ClientConfiguration.where(id: self.default_config_id || self.configurations.first.id).try(:last)
   end
 
   def default_config=(in_config)
@@ -15,7 +15,7 @@ class ConfigurationGroup < ActiveRecord::Base
   end
 
   def canary_config
-    Configuration.where(id: self.canary_config_id).try(:last)
+    ClientConfiguration.where(id: self.canary_config_id).try(:last)
   end
 
   def canary_config=(in_config)
