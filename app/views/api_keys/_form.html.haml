@@ -7,5 +7,10 @@
       %ul
         - @api_key.errors.full_messages.each do |message|
           %li= message
-  .actions
-    = f.submit
+  .form-group
+    %label Notes
+    = f.text_field :notes, size: 65, class: 'form-control'
+  .form-group
+    %label Permissions
+    = f.select :perms, ApiKey::PERMS
+  = f.submit 'Add', class: 'btn btn-default'
