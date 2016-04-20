@@ -15,14 +15,14 @@
       - @configuration_group.configurations.each do |config|
         %tr
           %td
-            %a{:href => "#{@configuration_group.id}/configurations/#{config.id}/edit"}= config.name
+            = link_to config.name, edit_client_configuration_path(config)
           %td= config.version
-          %td= config.assigned_endpoints.count
-          %td= config.configured_endpoints.count
+          %td= config.assigned_clients.count
+          %td= config.configured_clients.count
           %td
             - checked = @default_config == config
             = radio_button_tag :default_config, config.id, checked, { disabled: 'disabled' }
-  = link_to 'Add New Configuration', new_configuration_group_configuration_path(@configuration_group)
+  = link_to 'Add New Configuration', new_configuration_group_client_configuration_path(@configuration_group)
   %h2
     Endpoints in this group (#{@clients.count})
 

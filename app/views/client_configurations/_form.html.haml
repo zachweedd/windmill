@@ -1,0 +1,22 @@
+= form_for @client_configuration do |f|
+  - if @client_configuration.errors.any?
+    #error_explanation
+      %h2= "#{pluralize(@client_configuration.errors.count, "error")} prohibited this client configuration from being saved:"
+      %ul
+        - @client_configuration.errors.full_messages.each do |msg|
+          %li= msg
+  .form-group
+    = f.label :name
+    = f.text_field :name, class: 'form-control'
+  .form-group
+    = f.label :version
+    = f.text_field :version, class: 'form-control', placeholder: '0.0.1'
+  .form-group
+    = f.label :notes
+    = f.text_area :notes, class: 'form-control', placeholder: 'A good configuration', rows: '5'
+  .form-group
+    - json_value = JSON.pretty_generate(@client_configuration.config_json || [])
+    = f.label :configuration_json
+    = f.text_area :config_json, class: 'form-control', rows: '20', value: json_value
+
+  = f.submit 'Update', class: 'button btn btn-default'

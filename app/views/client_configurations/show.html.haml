@@ -1,0 +1,13 @@
+.container
+  %p#notice= notice
+  %h1=@client_configuration.name
+  %p
+    %strong Notes:
+    =@client_configuration.notes
+  %p
+    %strong Version:
+    =@client_configuration.version
+  %p
+    %strong Config JSON:
+    =@client_configuration.config_json
+  = link_to 'Edit', edit_client_configuration_path(@client_configuration)

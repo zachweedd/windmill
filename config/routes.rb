@@ -3,8 +3,12 @@ Rails.application.routes.draw do
 
   resources :clients
   resources :api_keys
+
+  resources :client_configurations, only: [:show, :edit, :update, :destroy]
+
   resources :configuration_groups do
-    resources :client_configurations, controller: 'configuration_groups/configurations'
+    resources :client_configurations, only: [:index, :new, :create],
+      controller: 'configuration_groups/client_configurations'
   end
 
   namespace :api do
