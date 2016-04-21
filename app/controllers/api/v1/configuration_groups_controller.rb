@@ -1,4 +1,4 @@
-class ConfigurationGroupsController < ApplicationController
+class Api::V1::ConfigurationGroupsController < Api::V1::BaseApiController
   before_action :set_configuration_group, only: [:show, :edit, :update, :destroy]
 
   def index
@@ -6,37 +6,32 @@ class ConfigurationGroupsController < ApplicationController
   end
 
   def show
-    @clients = @configuration_group.clients
-  end
-
-  def new
-    @configuration_group = ConfigurationGroup.new
-  end
-
-  def edit
   end
 
   def create
     @configuration_group = ConfigurationGroup.new(configuration_group_params)
 
     if @configuration_group.save
-      redirect_to @configuration_group, notice: 'Configuration group was successfully created.'
+      render :show
     else
-      render :new
+      render json: { status: 'error', errors: @configuration_group.errors }
     end
   end
 
   def update
     if @configuration_group.update(configuration_group_params)
-      redirect_to @configuration_group, notice: 'Configuration group was successfully updated.'
+      render :show
     else
-      render :edit
+      render json: { status: 'error', errors: @configuration_group.errors }
     end
   end
 
   def destroy
-    @configuration_group.destroy
-    redirect_to configuration_groups_url, notice: 'Configuration group was successfully destroyed.'
+    if @configuration_group.destroy
+      render json: { status: 'deleted' }
+    else
+      render json: { status: :error, errors: @configuration_group.errors }
+    end
   end
 
   private
