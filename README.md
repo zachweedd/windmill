@@ -10,26 +10,6 @@ the new config does not cause problem before deploying to all machines.
 
 ## Getting started
 
-The quickest way to get started is to click this button down here.
-
-[![Deploy to Heroku](https://www.herokucdn.com/deploy/button.png)](https://heroku.com/deploy)
-
-If you deploy to Heroku using the button above, you'll need to view the
-environment variables to get the random secret that was generated for the NODE_ENROLL_SECRET
-used by the windmill application.
-
-## Not using Heroku
-
-For security purposes, the software requires new endpoints to supply a shared
-secret which is found in an environment variable named `NODE_ENROLL_SECRET`.
-While  not completely necessary, you may want to set a random in an environment
-variabled  named `COOKIE_SECRET`. If you do not set `COOKIE_SECRET` then users
-will have to  re-authenticate every time you restart the server. Finally, since
-this was written by a Heroku employee intending to run this on Heroku if you run
-the app in production the code expects an environment variable named
-DATABASE_URL with a url pointing to a postgres database. Absent that variable,
-production mode will fall back to a postgres database on localhost.
-
 To run the server run the following commands. The first two commands should only
 need to be run once
 
@@ -59,7 +39,7 @@ for osqueryd to look to your server.
 ```
 --tls_hostname=dns.name.of.your.server.with.no.https.on.the.front.com
 --config_plugin=tls
---config_tls_endpoint=/api/config
+--config_tls_endpoint=/api/v1/config
 --config_tls_refresh=14400
 --enroll_tls_endpoint=/api/enroll
 --enroll_secret_path=/etc/osquery/osquery.secret
@@ -82,62 +62,6 @@ lines that you may include in your osquery.flags file include:
 Then you can start osqueryd (on linux) with a simple `/etc/init.d/osqueryd start`
 or `service start osqueryd`
 
-## Authentication and logging in
-Users must authenticate to access the windmill UI. There is no local storage of
-user information, users must authenticate using an OAuth provider, such as
-Google or GitHub. You'll need to get an OAuth ID and an OAuth Secret from the
-provider of your choice.
-
-### Authorized Users
-
-You also need to create a whitelist of allowed email addresses.
-
-The prefered option is to set the environment variable `AUTHORIZEDUSERS` with a
-comma seperated list of email addresses.
-
-`export AUTHORIZEDUSERS=user1@example.com,user2@example.com`
-
-The secondary option is listing users in a file named `authorized_users.txt`.
-
-__Example:__ authorized\_users.txt
-
-```
-user1@example.com
-user2@example.com
-```
-> If you're running windmill on Heroku one easy way to manage users without having
-merge problems from master is to create a separate branch named users, uncomment
-the line in `.gitignore` that hides `authorized_users.txt`.  Then populate your
-`authorized_users.txt` file. Finally you can `git push heroku users:master`.
-Later you can switch back to master and git pull for updates. Then just go back
-to your user branch and `git rebase master`.
-
-### Authenticate with GitHub
-
-Populate an environment variable named `GITHUB_KEY` and a variable named
-`GITHUB_SECRET`. If *both*  of these variables are populated with a value, then
-the login with GitHub option  will be visible on the login page.
-
-### Authenticate with Heroku
-
-Populate an environment variable named `HEROKU_KEY` and a variable named
-`HEROKU_SECRET`. If *both*  of these variables are populated with a value, then
-the login with Heroku option  will be visible on the login page.
-
-### Authenticate with Google
-
-Populate an environment variable named `GOOGLE_ID` and a variable named
-`GOOGLE_SECRET`. If *both*  of these variables are populated with a value, then
-the login with Google option  will be visible on the login page. You will also need to authorize the callback URL `https://yourserver.yourdomain.com/auth/google/callback` for your credentials.
-
-Special note, logging in with Google may require an extra step to avoid protocol
-mismatch if you use a service that runs your app unencrypted but uses a service
-in between to encrypt, such as Heroku. In those cases when you try to
-authenticate with google the requested callback address will not have the https.
-To fix this, you need to set yet another environment variable called `FULL_URL`.
-That should have the https address of your server, e.g.
-`https://yourserver.yourdomain.com`.
-
 ### API Authentication
 
 If you've logged into the windmill server you can create api keys with either
@@ -146,9 +70,7 @@ api call as an http header called Authentication. For example, using curl you
 could get a list of configuration groups with this command:
 
 ```
-curl -i \
--H "authentication: 0944660295b1e3c09aba1ce7ffcfe5da336a510d9963b94dbb0376153ac31e33" \
-http://localhost:4567/api/configuration_groups
+curl http://localhost:3000/api/v1/status -H 'Authorization: Token token="2f85240abb627ff45545a1b57715a09de4a23b2f02dac0713348a0939551b37d"'
 ```
 
 A key with write permission is necessary for any request

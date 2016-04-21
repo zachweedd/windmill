@@ -20,7 +20,7 @@ Rails.application.routes.draw do
       end
 
       resources :clients do
-        get :config, to: 'clients/configuration#show'
+        get :configuration, to: 'clients/configuration#show'
       end
 
       resources :client_configurations

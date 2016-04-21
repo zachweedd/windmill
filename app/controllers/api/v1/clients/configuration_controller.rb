@@ -1,4 +1,4 @@
-class Api::V1::Clients::ConfigurationController < BaseApiController
+class Api::V1::Clients::ConfigurationController < Api::V1::BaseApiController
   before_action :set_client
 
   def show
@@ -8,7 +8,7 @@ class Api::V1::Clients::ConfigurationController < BaseApiController
   private
 
     def set_client
-      @client = Client.find(params[:id])
+      @client = Client.find(params[:client_id])
     end
 
     def client_configuration_params
