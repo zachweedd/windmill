@@ -10,12 +10,12 @@ class Client < ActiveRecord::Base
 
 
   def get_config(params={})
-    config_count += 1
-    last_config_time = Time.now
-    last_config = assigned_config
-    last_version = params[:user_agent] if params[:user_agent]
-    save
-    assigned_config.config_json
+    self.config_count += 1
+    self.last_config_time = Time.now
+    self.last_config = assigned_config
+    self.last_version = params[:user_agent] if params[:user_agent]
+    self.save
+    self.assigned_config.config_json
   end
 
 
