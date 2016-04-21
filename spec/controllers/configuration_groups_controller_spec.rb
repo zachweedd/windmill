@@ -11,6 +11,10 @@ RSpec.describe ConfigurationGroupsController, :controller do
 
   let(:valid_session) { {} }
 
+  before do
+    sign_in :user, create(:user, :confirmed)
+  end
+
   describe "GET #index" do
     it "assigns all configuration_groups as @configuration_groups" do
       configuration_group = ConfigurationGroup.create! valid_attributes

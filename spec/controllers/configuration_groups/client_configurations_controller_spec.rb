@@ -14,6 +14,10 @@ RSpec.describe ConfigurationGroups::ClientConfigurationsController, :controller 
 
   let(:valid_session) { {} }
 
+  before do
+    sign_in :user, create(:user, :confirmed)
+  end
+
   describe "POST #create" do
     context "with valid params" do
       it "creates a new ClientConfiguration" do

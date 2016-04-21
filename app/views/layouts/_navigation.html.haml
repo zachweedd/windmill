@@ -14,3 +14,6 @@
             = link_to 'Home', configuration_groups_path
           %li.active
             = link_to 'API Keys', api_keys_path
+        - if current_user
+          %p.navbar-text.navbar-right
+            = link_to 'logout', destroy_user_session_path, method: :delete

@@ -16,6 +16,10 @@ RSpec.describe ClientConfigurationsController, :controller do
 
   let(:valid_session) { {} }
 
+  before do
+    sign_in :user, create(:user, :confirmed)
+  end
+
   describe "GET #show" do
     it "assigns the requested client configuration as @client_configuration" do
       client_configuration = ClientConfiguration.create! valid_attributes

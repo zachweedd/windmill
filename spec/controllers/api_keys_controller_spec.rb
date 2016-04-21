@@ -7,6 +7,10 @@ RSpec.describe ApiKeysController, :controller do
 
   let(:valid_session) { {} }
 
+  before do
+    sign_in :user, create(:user, :confirmed)
+  end
+
   describe "GET #index" do
     it "assigns all api_keys as @api_keys" do
       api_key = ApiKey.create! valid_attributes

@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe ConfigurationGroupsController, :controller do
+RSpec.describe Api::V1::ConfigurationGroupsController, :controller do
   let(:configuration_group){ create :configuration_group }
   let(:configuration){ create(:client_configuration, config_json: { test: 'test' }) }
   let(:configuration_two){ create(:client_configuration, config_json: { test: 'test' }) }
@@ -15,7 +15,7 @@ RSpec.describe ConfigurationGroupsController, :controller do
 
   describe 'GET #index' do
     it 'assigns all configuration_groups as @configuration_groups' do
-      get :index
+      get :index, format: :json
       expect(assigns(:configuration_groups)).to eq ConfigurationGroup.all
     end
   end

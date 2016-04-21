@@ -24,6 +24,9 @@ Rails.application.routes.draw do
       end
 
       resources :client_configurations
+      resources :configuration_groups
     end
   end
+
+  devise_for :users
 end

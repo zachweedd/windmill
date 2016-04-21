@@ -8,6 +8,8 @@ gem 'dotenv'
 
 gem 'puma'
 
+gem 'devise'
+
 # Asset-related Gems
 gem 'bootstrap-sass', '~> 3.3.6'
 gem 'sass-rails', '~> 5.0'
