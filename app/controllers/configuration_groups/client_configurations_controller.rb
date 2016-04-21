@@ -15,6 +15,10 @@ class ConfigurationGroups::ClientConfigurationsController < ApplicationControlle
     end
   end
 
+  def new
+    @client_configuration = @configuration_group.configurations.new
+  end
+
   private
 
     def set_configuration_group
