@@ -12,8 +12,18 @@ Rails.application.routes.draw do
   end
 
   namespace :api do
-    get :status, to: 'api#status'
-    post :enroll, to: 'api#enroll'
-    post :config, to: 'api#config'
+    namespace :v1 do
+      get :status, to: 'base_api#status'
+
+      resource :client do
+        post :enroll, to: 'clients/enrollment#create'
+      end
+
+      resources :clients do
+        get :config, to: 'clients/configuration#show'
+      end
+
+      resources :client_configurations
+    end
   end
 end

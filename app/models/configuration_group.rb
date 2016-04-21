@@ -6,6 +6,12 @@ class ConfigurationGroup < ActiveRecord::Base
 
   before_destroy :can_destroy?
 
+  # Override to provide default ConfigurationGroup if
+  # requested Configuration Group is not found
+  def self.find_by(*args)
+    super || super(name: 'default')
+  end
+
   def default_config
     ClientConfiguration.where(id: self.default_config_id || self.configurations.first.id).try(:last)
   end
